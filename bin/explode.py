@@ -1,4 +1,4 @@
-#!/Users/austincurtis/Git/starveio-bot/bin/python3
+#!/Users/zach.lester/starveio-bot/bin/python3
 #
 # The Python Imaging Library
 # $Id$

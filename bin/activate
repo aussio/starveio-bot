@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/austincurtis/Git/starveio-bot"
+VIRTUAL_ENV="/Users/zach.lester/starveio-bot"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

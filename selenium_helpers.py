@@ -10,6 +10,7 @@ from selenium.webdriver.support.select import Select
 # Amount of pixels the top of the Chrome browser takes up
 Y_OFFSET = 97
 SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 800
 
 def get_chrome_driver():
     '''
@@ -19,7 +20,7 @@ def get_chrome_driver():
     '''
     chrome_options = Options()
     chrome_options.add_argument('disable-infobars')
-    chrome_options.add_argument(f'window-size={SCREEN_WIDTH},900')
+    chrome_options.add_argument(f'window-size={SCREEN_WIDTH},{SCREEN_HEIGHT}')
     chrome_options.add_argument('window-position=0,0')
     driver = webdriver.Chrome(chrome_options=chrome_options)
     return driver
@@ -66,7 +67,7 @@ def start_game(driver):
     actions = ActionChains(driver)
     actions.move_to_element_with_offset(top_left,
         SCREEN_WIDTH / 2,
-        670 - Y_OFFSET)
+        590 - Y_OFFSET)
     actions.click()
     actions.perform()
     print("Clicking the PLAY button!")

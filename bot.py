@@ -8,7 +8,7 @@ from selenium_helpers import *
 IMAGE_DIR = os.path.dirname(os.path.realpath(__file__)) + '/images'
 
 def screenGrab():
-    box = (0, 194, 2400, 1792)
+    box = (0, 194, 2400, 1594)
     screenshot = ImageGrab.grab(box)
     file_location = IMAGE_DIR + '/full_snap__' + str(int(time())) + '.png'
     screenshot.save(file_location, 'PNG')
@@ -23,7 +23,7 @@ def main():
         start_game(driver)
         print("Waiting for game to start...")
         sleep(3)
-        #screenGrab()
+        screenGrab()
         print("sleeping")
         sleep(60)
     except Exception as e:

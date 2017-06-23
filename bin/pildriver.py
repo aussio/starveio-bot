@@ -1,4 +1,4 @@
-#!/Users/austincurtis/Git/starveio-bot/bin/python3
+#!/Users/zach.lester/starveio-bot/bin/python3
 """PILdriver, an image-processing calculator using PIL.
 
 An instance of class PILDriver is essentially a software stack machine

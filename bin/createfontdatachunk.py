@@ -1,4 +1,4 @@
-#!/Users/austincurtis/Git/starveio-bot/bin/python3
+#!/Users/zach.lester/starveio-bot/bin/python3
 from __future__ import print_function
 import base64
 import os
