@@ -3,14 +3,18 @@
 Run the following commands to install the requirements:
 
 ```
-# Activate the virtual environment
-source bin/activate
+# Install the package manager we need
+brew install conda
 
-# Install python requirements
+# Create virtual environment
+conda create --name=starveio3.5 python=3.5
+
+# Install OpenCV
+# http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_tutorials.html
+conda install -c menpo opencv3
+
+# Install the rest of our requirements
 pip install -r requirements.txt
-
-# Install mac requirements for Selenium
-brew install chromedriver
 ```
 
 ... I may have forgotten some. I think that's it. :)
