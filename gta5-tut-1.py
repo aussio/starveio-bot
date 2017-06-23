@@ -5,10 +5,10 @@ import time
 
 def capture_screen(wait=True):
     box = (0, 194, 1200, 800)
-    screen =  np.array(ImageGrab.grab(box))
-    # timer
+    screen = np.array(ImageGrab.grab(box).convert('RGB'))
     # convert color
-    # screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
+    b, g, r = cv2.split(screen)
+    screen = cv2.merge([r, g, b])
     # show image in new window
     cv2.imshow('window',screen)
     if wait:
@@ -24,5 +24,5 @@ def screen_record():
             cv2.destroyAllWindows()
             break
 
-capture_screen()
-#screen_record()
+#capture_screen()
+screen_record()
