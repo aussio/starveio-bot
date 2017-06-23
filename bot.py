@@ -8,8 +8,8 @@ from selenium_helpers import *
 IMAGE_DIR = os.path.dirname(os.path.realpath(__file__)) + '/images'
 
 def screenGrab():
-    box = ()
-    screenshot = ImageGrab.grab()
+    box = (0, 194, 2000, 1792)
+    screenshot = ImageGrab.grab(box)
     file_location = IMAGE_DIR + '/full_snap__' + str(int(time.time())) + '.png'
     screenshot.save(file_location, 'PNG')
     print('screenshot saved to {}'.format(file_location))
