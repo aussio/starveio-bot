@@ -19,7 +19,8 @@ def main():
     try:
         open_game(driver)
         type_in_name(driver, "courtney")
-        screenGrab()
+        #screenGrab()
+        start_game(driver)
         print("sleeping")
         time.sleep(60)
     except Exception as e:
