@@ -7,14 +7,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 
 def get_chrome_driver():
-    driver_path = os.path.expanduser('~') + '/chromedriver'
     chrome_options = Options()
     chrome_options.add_argument('disable-infobars')
     chrome_options.add_argument('window-size=700,700')
     chrome_options.add_argument('window-position=0,0')
 
-    driver = webdriver.Chrome(executable_path=driver_path,
-                              chrome_options=chrome_options)
+    driver = webdriver.Chrome(chrome_options=chrome_options)
     return driver
 
 def get_firefox_driver():
