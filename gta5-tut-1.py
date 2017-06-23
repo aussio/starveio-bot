@@ -3,17 +3,26 @@ from PIL import ImageGrab
 import cv2
 import time
 
-def screen_record():
+def capture_screen(wait=True):
     box = (0, 194, 1200, 800)
+    screen =  np.array(ImageGrab.grab(box))
+    # timer
+    # convert color
+    # screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
+    # show image in new window
+    cv2.imshow('window',screen)
+    if wait:
+        cv2.waitKey()
+
+def screen_record():
     last_time = time.time()
     while(True):
-        # 800x600 windowed mode
-        printscreen =  ImageGrab.grab(box)
         print('loop took {} seconds'.format(time.time()-last_time))
         last_time = time.time()
-        cv2.imshow('window',np.array(printscreen))
+        capture_screen(wait=False)
         if cv2.waitKey(25) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
             break
 
-screen_record()
+capture_screen()
+#screen_record()
