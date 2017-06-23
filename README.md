@@ -1,11 +1,11 @@
 ### Getting Started
 
-Run the following commands to install the requirements:
-
-```
 # Install the package manager we need
 https://conda.io/docs/install/quick.html#os-x-miniconda-install
 
+Then run the following commands to install the requirements:
+
+```
 # Create virtual environment
 conda create --name=starveio3.5 python=3.5
 
