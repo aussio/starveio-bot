@@ -9,7 +9,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 def get_chrome_driver():
     chrome_options = Options()
     chrome_options.add_argument('disable-infobars')
-    chrome_options.add_argument('window-size=700,700')
+    chrome_options.add_argument('window-size=1000,1000')
     chrome_options.add_argument('window-position=0,0')
 
     driver = webdriver.Chrome(chrome_options=chrome_options)

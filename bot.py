@@ -10,16 +10,18 @@ IMAGE_DIR = os.path.dirname(os.path.realpath(__file__)) + '/images'
 def screenGrab():
     box = ()
     screenshot = ImageGrab.grab()
-    screenshot.save(IMAGE_DIR + '/full_snap__' + str(int(time.time())) + '.png', 'PNG')
+    file_location = IMAGE_DIR + '/full_snap__' + str(int(time.time())) + '.png'
+    screenshot.save(file_location, 'PNG')
+    print('screenshot saved to {}'.format(file_location))
 
 def main():
     driver = get_chrome_driver()
     try:
         open_game(driver)
         type_in_name(driver, "courtney")
+        screenGrab()
         print("sleeping")
         time.sleep(60)
-        #screenGrab()
     except Exception as e:
         print(e)
         driver.close()
