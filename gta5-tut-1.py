@@ -3,14 +3,33 @@ from PIL import ImageGrab
 import cv2
 import time
 
+TOP_LEFT_X = 0
+TOP_LEFT_Y = 100
+BOT_RIGHT_X = 720
+BOT_RIGHT_Y = 800
+
+WIDTH = BOT_RIGHT_X - TOP_LEFT_X
+HEIGHT = BOT_RIGHT_Y - TOP_LEFT_Y
+
 def capture_screen(wait=True):
-    box = (0, 194, 1200, 800)
+    box = (TOP_LEFT_X * 2,
+           TOP_LEFT_Y * 2,
+           BOT_RIGHT_X * 2,
+           BOT_RIGHT_Y * 2
+           )
     screen = np.array(ImageGrab.grab(box).convert('RGB'))
     # convert color
     b, g, r = cv2.split(screen)
     screen = cv2.merge([r, g, b])
-    # show image in new window
-    cv2.imshow('window',screen)
+    # setup window settings
+    window_title = "ZachWasHere"
+    cv2.namedWindow(window_title, cv2.WINDOW_NORMAL)
+    # resize window
+    cv2.resizeWindow(window_title, WIDTH, HEIGHT)
+    # resize image
+    screen = cv2.resize(screen, (WIDTH, HEIGHT))
+    # create window and display image
+    cv2.imshow(window_title, screen)
     if wait:
         cv2.waitKey()
 
