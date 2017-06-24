@@ -11,7 +11,6 @@ TOP_LEFT_Y = CHROME_EXTRAS - TOP_MAC_BAR
 
 class ScreenCapture:
     def __init__(self):
-        '''  '''
         self.captured_area = {}
 
     def capture_screen(self):
@@ -20,6 +19,9 @@ class ScreenCapture:
 
         Right now we've hardcoded to only capture the left-half of the screen and to not capture
             the top part of a Chrome window (without bookmarks bar).
+
+        Returns:
+            PIL.Image
         '''
         try:
             with mss() as sct:
@@ -31,11 +33,11 @@ class ScreenCapture:
                     # Capture starting from below the Chrome header
                     self.captured_area['top'] = monitor['top'] + TOP_LEFT_Y
                     # Capture starting from far left of screen
-                    self.captured_area['left'] = monitor]['left']
+                    self.captured_area['left'] = monitor['left']
                     # Capture only half the width of the monitor
                     self.captured_area['width'] = monitor['width'] // 2
                     # Capture entire rest of monitor height
-                    self.captured_area['height'] = monitor['height'] - captured_area['top']
+                    self.captured_area['height'] = monitor['height'] - self.captured_area['top']
 
                     # This functions sets the sct.width, sct.height, and sct.image for below
                     sct.get_pixels(self.captured_area)
@@ -48,6 +50,13 @@ class ScreenCapture:
     def process_image(self, screen, color_conversion_type):
         '''
         Convert image's color to color_conversion_type, and resize image to window's size.
+
+        Params:
+            screen: A numpy.array of an image
+            color_conversion_type: A cv2 color conversion constant
+
+        Returns:
+            numpy.array
         '''
         # convert color
         screen = cv2.cvtColor(screen, color_conversion_type)
@@ -59,8 +68,14 @@ class ScreenCapture:
         return screen
 
     def create_window(self, wait=True):
+        '''
+        Creates a window that is the same size as the created image from capture_screen
+
+        Params:
+            wait: Whether or not he window should wait for user input before closing.
+        '''
         screen = np.array(self.capture_screen())
-        screen = self.process_image(screen, cv2.COLOR_RGB2BGR)
+        screen = self.process_image(screen, cv2.COLOR_RGB2GRAY)
 
         # setup window settings
         window_title = "ZachWasHere"
@@ -76,6 +91,10 @@ class ScreenCapture:
             cv2.waitKey()
 
     def screen_record(self):
+        '''
+        Runs self.create_window() in an endless loop
+        Also prints out the time it took to refresh each frame.
+        '''
         last_time = time.time()
         while(True):
             print('loop took {} seconds'.format(time.time()-last_time))
