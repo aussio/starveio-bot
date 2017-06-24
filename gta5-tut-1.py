@@ -47,7 +47,7 @@ class ScreenCapture:
         except ScreenshotError as ex:
             print(ex)
 
-    def process_image(self, screen, color_conversion_type):
+    def process_image(self, image, color_conversion_type, canny=True):
         '''
         Convert image's color to color_conversion_type, and resize image to window's size.
 
@@ -58,16 +58,22 @@ class ScreenCapture:
         Returns:
             numpy.array
         '''
+        original_image = image
         # convert color
-        screen = cv2.cvtColor(screen, color_conversion_type)
+        image = cv2.cvtColor(image, color_conversion_type)
+
+        if canny:
+            # edge detection
+            image = cv2.Canny(image, 55, 85)
+
         # resize image
-        screen = cv2.resize(screen,
+        image = cv2.resize(image,
                             (self.captured_area['width'],
                              self.captured_area['height'])
                            )
-        return screen
+        return image
 
-    def create_window(self, wait=True):
+    def create_window(self, window_title, wait=True):
         '''
         Creates a window that is the same size as the created image from capture_screen
 
@@ -78,7 +84,6 @@ class ScreenCapture:
         screen = self.process_image(screen, cv2.COLOR_RGB2GRAY)
 
         # setup window settings
-        window_title = "ZachWasHere"
         cv2.namedWindow(window_title, cv2.WINDOW_NORMAL)
         # resize window
         cv2.resizeWindow(window_title,
@@ -99,7 +104,7 @@ class ScreenCapture:
         while(True):
             print('loop took {} seconds'.format(time.time()-last_time))
             last_time = time.time()
-            self.create_window(wait=False)
+            self.create_window('canny', wait=False)
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 cv2.destroyAllWindows()
                 break
