@@ -2,8 +2,12 @@ import numpy as np
 import cv2
 import time
 
+
 from PIL import ImageGrab, Image
 from mss.darwin import MSS as mss
+#from directkeys import PressKey, W, A, S, D
+
+
 
 TOP_MAC_BAR = 21
 CHROME_EXTRAS = 97
@@ -64,7 +68,10 @@ class ScreenCapture:
 
         if canny:
             # edge detection
-            image = cv2.Canny(image, 55, 85)
+            min_value = cv2.getTrackbarPos('min_value', 'canny_edge')
+            max_value = cv2.getTrackbarPos('max_value', 'canny_edge')
+            image = cv2.Canny(image, min_value, max_value)
+            #image = cv2.Canny(image, 40, 65)
 
         # resize image
         image = cv2.resize(image,
@@ -100,6 +107,10 @@ class ScreenCapture:
         Runs self.create_window() in an endless loop
         Also prints out the time it took to refresh each frame.
         '''
+        for i in list(range(4))[::-1]:
+            print(i+1)
+            time.sleep(1)
+
         last_time = time.time()
         while(True):
             print('loop took {} seconds'.format(time.time()-last_time))
