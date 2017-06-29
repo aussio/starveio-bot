@@ -22,24 +22,21 @@ def screenGrab():
     screenshot.save(file_location, 'PNG')
     print('screenshot saved to {}'.format(file_location))
 
-def key_press():
-    pyautogui.keyDown('w')
-    sleep(0)
-    pyautogui.keyUp('w')
-    pyautogui.keyDown('a')
-    sleep(0)
-    pyautogui.keyUp('a')
-    pyautogui.keyDown('s')
-    sleep(0)
-    pyautogui.keyUp('s')
-    pyautogui.keyDown('d')
-    sleep(0)
-    pyautogui.keyUp('d')
+def key_press(key1, key2, key3, key4, timing):
+    pyautogui.keyDown(key1)
+    sleep(timing)
+    pyautogui.keyUp(key1)
+    pyautogui.keyDown(key2)
+    sleep(timing)
+    pyautogui.keyUp(key2)
+    pyautogui.keyDown(key3)
+    sleep(timing)
+    pyautogui.keyUp(key3)
+    pyautogui.keyDown(key4)
+    sleep(timing)
+    pyautogui.keyUp(key4)
 
-def move_circle():
-    radius = 200
-    steps = 15
-    duration = 1
+def move_circle(radius, steps, duration):
     distance = (math.pi * 2 * radius) / steps
     step_duration = duration / steps
     # generate 360 decimal coordiantes for a circle'ish shape mouse movement
@@ -66,20 +63,19 @@ def main():
         print("Waiting for game to start...")
         sleep(5)
         #click on the screen
+        
+        p1 = Process(target = key_press, args = ('w', 'a', 's', 'd', 1))
+        p2 = Process(target = move_circle, args = (200, 15, 4))
+
         pyautogui.click(600, 300)
-        x = 0 
-        while x < 5:
-            Thread(target = key_press).start()
-            Thread(target = move_circle).start()
-            x += 1
-        #screenGrab()
-        #print("sleeping")
-        #sleep(60)
+
+        p1.start()
+        p2.start()
 
     except Exception as e:
         print(e)
-        #driver.close()
+        driver.close()
 
 if __name__ == '__main__':  
     main()
-    input("Press enter to quit...")
+    
