@@ -98,8 +98,7 @@ ENV/
 # mypy
 .mypy_cache/
 
-# don't check in images
-images/
+# other stuff we dont want checked in
 bin/
 *.sublime*
 pyvenv.cfg
